@@ -1,0 +1,35 @@
+{% extends 'reviews/base.html' %}
+{% block title %}
+{% if instance %}
+Edycja {{ model_type }} {{ instance }}
+{% else %}
+Nowy {{ model_type }}
+{% endif %}
+{% endblock %}
+{% block content %}
+
+<br>
+<span></span>
+<br>
+<br>
+
+{% if user.is_authenticated %}
+{% if user.first_name %}
+<h3>
+    Witaj, {{ user.first_name }}, <br>
+{{ user.email }}.
+{% else %}
+    <h3>
+    Witaj, Bezimienny
+    </h3>
+    <br>
+    <br>
+        {% endif %}
+<p>Odwiedź swój <a href="/accounts/profile">profil</a>.
+</p>
+
+{% else %}
+<h4> Jesteś niezalogowany, zaloguj się <a href="{% url 'accounts:login' %}">tutaj</a>.
+</h4>
+{% endif %}
+{% endblock %}

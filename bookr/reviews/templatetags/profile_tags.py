@@ -1,0 +1,13 @@
+from django import template
+from reviews.models import Review
+
+register = template.Library()
+
+@register.inclusion_tag('book_list.html')
+def book_list(username):
+    reviews = Review.objects.filter(creator__username__contains=username)
+    book_list = []
+    for review in reviews:
+        a = review.book.title
+        book_list.append(a)
+    return {'books_read': book_list}
